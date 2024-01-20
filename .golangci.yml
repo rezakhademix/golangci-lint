@@ -1,0 +1,149 @@
+linters-settings:
+  asasalint:  # will prevent any function for having "...any" variadic parameter except log funcs
+    exclude:
+      - \.Debugf
+      - \.Infof
+      - \.Warnf
+      - \.Errorf
+      - \.Fatalf
+    ignore-test: true
+
+  errcheck:
+    check-type-assertions: true
+
+  gocyclo:
+    min-complexity: 10
+
+  dupl:
+    threshold: 200
+
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+    ignore-tests: true
+    
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+
+  gomnd:
+    checks:
+      - argument
+      - case
+      - condition
+      - operation
+      - return
+      - assign
+    ignored-numbers:
+      - '0666'  # will ignore hard coded numbers which are permission codes, but a better approach is using octal number e.g: 0o666 and remove this section
+      - '0755'
+    ignored-functions:
+      - '^math\.'  # will ignore hard coded numbers which are used alongside math, e.g: math.rand() * 2
+      - '^context\.'  # will ignore hard coded numbers which are used alongside context, e.g: context.WithTimeout(context.Background(), 3*time.Second)
+
+  govet:
+    check-shadowing: true
+    enable:
+      - fieldalignment
+      - nilfunc
+      - nilness
+
+  revive:
+    severity: error
+    enable-all-rules: true
+    confidence: 0.8
+    rules:
+      - name: unused-parameter
+        severity: warning
+        disabled: false
+        arguments:
+          - allowRegex: "."
+      - name: unused-receiver
+        severity: warning
+        disabled: false
+        arguments:
+          - allowRegex: "."
+      - name: line-length-limit  # will check for line length but you have to enable it
+        severity: warning 
+        disabled: true
+        arguments: [80]  # pass desired number for each line length
+      - name: unchecked-type-assertion
+        severity: warning
+        disabled: true
+      - name: add-constant
+        severity: warning
+        disabled: false
+        arguments:
+          - maxLitCount: "10"
+            allowStrs: '""'
+            allowInts: "0,1,2,3,4"
+      - name: cognitive-complexity  # will check for code complexity and every if, else, ||, & and ! charactars will add to complexity score
+        severity: warning
+        disabled: true
+        arguments: [10]  # pass a desired number for complexity score, smaller numbers means more restrictions for using if, else, ||, & and ! chars
+
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+    
+  depguard: # will check dependencies and imported packages with defined rules
+    rules:
+      main:
+        files:
+          - "!**/*_a _file.go"
+        allow:
+          - $gostd
+          - github.com/rezakhdemix
+          - github.com/redis
+        deny:
+          - pkg: "github.com/pkg/example"
+            desc: should be replaced by blah blah package
+
+linters:
+  disable-all: true
+  enable:
+    - asasalint
+    - cyclop
+    # - depguard # if enabled, will check dependencies and imported packages with above rules
+    - dupl
+    - errcheck
+    # - errorlint # if enabled, will check for wrapping errors and error type assertions without ,ok idioms
+    - exhaustive
+    - goconst
+    - gocritic
+    # - godox # if enabled, will check codes for finding "todos", "bug" and "fixme" pharses
+    - gocyclo
+    - gomnd
+    - gosimple
+    - gosec
+    - govet  
+    - misspell
+    - musttag
+    - perfsprint
+    - prealloc
+    - predeclared
+    - usestdlibvars
+    - whitespace
+    - wsl
+    - revive 
+    - bodyclose
+    - exportloopref
+    - ineffassign
+    - nolintlint
+    - stylecheck
+    - unconvert
+
+run:
+  issues-exit-code: 1
+
+issues:
+  exclude-rules:
+    - path: _test\.go 
+      linters:
+        - gocyclo
+        - gosec
+        - dupl
