@@ -25,7 +25,7 @@ Before using this config file you need to do two below steps:
 ## 2) put `.golangci.yml` in your project root directory
 
 
-For more information and a detailed story you can read this story [What is A Golang Linter And How To Use It?](https://golangci-lint.run/).
+For more information and a detailed story you can read this story [What is A Golang Linter And How To Use It?](https://rezakhademix.medium.com/what-is-a-golang-linter-and-how-to-use-it-1bffc0bd8062).
 
 ## Used Linters
 
