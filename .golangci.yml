@@ -60,13 +60,13 @@ linters-settings:
       - name: unused-parameter
         severity: warning
         disabled: false
-        arguments:
-          - allowRegex: "."
+        # arguments:
+        #  - allowRegex: "."  # use regex to allow an unused-parameter when you need, e.g: (tx *gorm.DB) in gorm hooks
       - name: unused-receiver
         severity: warning
         disabled: false
-        arguments:
-          - allowRegex: "."
+        # arguments:
+        #  - allowRegex: "."  # use regex to allow an unused-receiver when you need
       - name: line-length-limit  # will check for line length but you have to enable it
         severity: warning 
         disabled: true
