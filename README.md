@@ -27,7 +27,7 @@ Before using this config file you need to do two below steps:
 
 For more information and a detailed story you can read [What is A Golang Linter And How To Use It?](https://rezakhademix.medium.com/what-is-a-golang-linter-and-how-to-use-it-1bffc0bd8062).
 
-For Integratin [golangci-lint](https://golangci-lint.run/) with VSCode just put these line on user JSON settings file:
+For integrating [golangci-lint](https://golangci-lint.run/) with VSCode just put these line on user JSON settings file:
 
 ```
 "go.lintTool": "golangci-lint",
