@@ -2,7 +2,7 @@
 ## A Golang Linter Configuration file for [golangci-lint](https://golangci-lint.run/)
 
 This is an opinionated configuration file for golangci-lint.
-Before using this config file you need to do two below steps:
+Before using this config file you need to do two steps:
 
 ## 1) install golangci-lint
     
