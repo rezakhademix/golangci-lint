@@ -70,7 +70,7 @@ linters-settings:
       - name: line-length-limit  # will check for line length but you have to enable it
         severity: warning 
         disabled: true
-        arguments: [80]  # pass desired number for each line length
+        arguments: [80]  # pass a desired number for each line length restriction
       - name: unchecked-type-assertion
         severity: warning
         disabled: true
