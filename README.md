@@ -17,7 +17,7 @@ Before using this config file you need to do two steps:
     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s latest
 
 
-    # docker way:
+    # docker:
     
     docker run --rm -v $(pwd):/app -v ~/.cache/golangci-lint/v1.55.2:/root/.cache -w /app golangci/golangci-lint:latest golangci-lint run -v
     
