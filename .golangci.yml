@@ -89,6 +89,10 @@ linters-settings:
         severity: warning
         disabled: true
         arguments: [10]  # pass a desired number for complexity score, smaller numbers means more restrictions for using if, else, ||, & and ! chars
+      - name: max-public-structs # set a max number for restricting max public struct count in a file
+        severity: warning
+        disabled: false
+        arguments: [10]
 
   nolintlint:
     require-explanation: true
