@@ -43,6 +43,10 @@ linters-settings:
       - return
       - assign
     ignored-numbers:
+      - "0"
+      - "1"
+      - "2"
+      - "3"
       - '0666'  # will ignore hard coded numbers which are permission codes, but a better approach is using octal number e.g: 0o666 and remove this section
       - '0755'
     ignored-functions:
