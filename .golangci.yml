@@ -127,7 +127,7 @@ linters:
     - exhaustive
     - goconst
     - gocritic
-    # - godox # if enabled, will check codes for finding "todos", "bug" and "fixme" pharses
+    # - godox # if enabled, will check lines for finding "todos", "bug" and "fixme" pharses
     - gocyclo
     - gomnd
     - gosimple
