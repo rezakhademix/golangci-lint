@@ -120,7 +120,7 @@ linters:
   enable:
     - asasalint
     - cyclop
-    # - depguard # if enabled, will check dependencies and imported packages with above rules
+    # - depguard # if enabled, will check dependencies and imported packages with defined rules
     - dupl
     - errcheck
     # - errorlint # if enabled, will check for wrapping errors and error type assertions without ,ok idioms
