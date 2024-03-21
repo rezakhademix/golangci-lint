@@ -32,7 +32,7 @@ linters-settings:
 
     settings:
       hugeParam:
-        sizeThreshold: 500 # set a size threshold for heavy struct to force developer use pointers instead of passing params by value
+        sizeThreshold: 500 # set a size threshold for heavy struct to force developers use pointers instead of passing params by value
 
   gomnd:
     checks:
