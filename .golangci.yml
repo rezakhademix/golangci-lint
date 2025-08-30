@@ -1,161 +1,141 @@
-linters-settings:
-  asasalint:  # will prevent any function for having "...any" variadic parameter except log funcs
-    exclude:
-      - \.Debugf
-      - \.Infof
-      - \.Warnf
-      - \.Errorf
-      - \.Fatalf
-    ignore-test: true
-
-  errcheck:
-    check-type-assertions: true
-
-  gocyclo:
-    min-complexity: 10
-
-  dupl:
-    threshold: 200
-
-  goconst:
-    min-len: 2
-    min-occurrences: 3
-    ignore-tests: true
-    
-  gocritic:
-    enabled-tags:
-      - diagnostic
-      - experimental
-      - opinionated
-      - performance
-      - style
-
-    settings:
-      hugeParam:
-        sizeThreshold: 500 # set a size threshold for heavy struct to force developers use pointers instead of passing params by value
-
-  gomnd:
-    checks:
-      - argument
-      - case
-      - condition
-      - operation
-      - return
-      - assign
-    ignored-numbers:
-      - "0"
-      - "1"
-      - "2"
-      - "3"
-      - '0666'  # will ignore hard coded numbers which are permission codes, but a better approach is using octal number e.g: 0o666 and remove this section
-      - '0755'
-    ignored-functions:
-      - '^math\.'  # will ignore hard coded numbers which are used alongside math, e.g: math.rand() * 2
-      - '^context\.'  # will ignore hard coded numbers which are used alongside context, e.g: context.WithTimeout(context.Background(), 3*time.Second)
-
-  govet:
-    check-shadowing: true
-    enable:
-      - fieldalignment
-      - nilfunc
-      - nilness
-
-  revive:
-    severity: error
-    enable-all-rules: true
-    confidence: 0.8
-    rules:
-      - name: unused-parameter
-        severity: warning
-        disabled: false
-        # arguments:
-        #  - allowRegex: "."  # use regex to allow an unused-parameter when you need, e.g: (tx *gorm.DB) in gorm hooks
-      - name: unused-receiver
-        severity: warning
-        disabled: false
-        # arguments:
-        #  - allowRegex: "."  # use regex to allow an unused-receiver when you need
-      - name: line-length-limit  # will check for line length but you have to enable it
-        severity: warning 
-        disabled: true
-        arguments: [80]  # pass a desired number for each line length restriction
-      - name: unchecked-type-assertion
-        severity: warning
-        disabled: true
-      - name: add-constant
-        severity: warning
-        disabled: false
-        arguments:
-          - maxLitCount: "10"
-            allowStrs: '""'
-            allowInts: "0,1,2,3,4"
-      - name: cognitive-complexity  # will check for code complexity and every if, else, ||, & and ! charactars will add to complexity score
-        severity: warning
-        disabled: true
-        arguments: [10]  # pass a desired number for complexity score, smaller numbers means more restrictions for using if, else, ||, & and ! chars
-      - name: max-public-structs # set a max number for restricting max public struct count in a file
-        severity: warning
-        disabled: false
-        arguments: [10]
-
-  nolintlint:
-    require-explanation: true
-    require-specific: true
-    
-  depguard: # will check dependencies and imported packages with defined rules
-    rules:
-      main:
-        files:
-          - "!**/*_a _file.go"
-        allow:
-          - $gostd
-          - github.com/rezakhdemix
-          - github.com/redis
-        deny:
-          - pkg: "github.com/pkg/example"
-            desc: should be replaced by blah blah package
-
+version: "2"
+run:
+  issues-exit-code: 1
 linters:
-  disable-all: true
+  default: none
   enable:
     - asasalint
+    - bodyclose
     - cyclop
-    # - depguard # if enabled, will check dependencies and imported packages with defined rules
     - dupl
     - errcheck
-    # - errorlint # if enabled, will check for wrapping errors and error type assertions without ,ok idioms
     - exhaustive
     - goconst
     - gocritic
-    # - godox # if enabled, will check lines for finding "todos", "bug" and "fixme" pharses
     - gocyclo
-    - gomnd
-    - gosimple
     - gosec
-    - govet  
+    - govet
+    - ineffassign
     - misspell
     - musttag
+    - nolintlint
     - perfsprint
     - prealloc
     - predeclared
+    - revive
+    - staticcheck
+    - unconvert
     - usestdlibvars
     - whitespace
     - wsl
-    - revive 
-    - bodyclose
-    - exportloopref
-    - ineffassign
-    - nolintlint
-    - stylecheck
-    - unconvert
-
-run:
-  issues-exit-code: 1
-
-issues:
-  exclude-rules:
-    - path: _test\.go 
-      linters:
-        - gocyclo
-        - gosec
-        - dupl
+  settings:
+    asasalint:
+      exclude:
+        - \.Debugf
+        - \.Infof
+        - \.Warnf
+        - \.Errorf
+        - \.Fatalf
+    depguard:
+      rules:
+        main:
+          files:
+            - "!**/*_a _file.go"
+          allow:
+            - $gostd
+            - github.com/rezakhdemix
+            - github.com/redis
+          deny:
+            - pkg: github.com/pkg/example
+              desc: should be replaced by blah blah package
+    dupl:
+      threshold: 200
+    errcheck:
+      check-type-assertions: true
+    goconst:
+      min-len: 2
+      min-occurrences: 3
+    gocritic:
+      enabled-tags:
+        - diagnostic
+        - experimental
+        - opinionated
+        - performance
+        - style
+      settings:
+        hugeParam:
+          sizeThreshold: 500
+    gocyclo:
+      min-complexity: 10
+    govet:
+      enable:
+        - fieldalignment
+        - nilfunc
+        - nilness
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+    revive:
+      confidence: 0.8
+      severity: error
+      enable-all-rules: true
+      rules:
+        - name: unused-parameter
+          severity: warning
+          disabled: false
+        - name: unused-receiver
+          severity: warning
+          disabled: false
+        - name: line-length-limit
+          arguments:
+            - 80
+          severity: warning
+          disabled: true
+        - name: unchecked-type-assertion
+          severity: warning
+          disabled: true
+        - name: add-constant
+          arguments:
+            - allowInts: 0,1,2,3,4
+              allowStrs: '""'
+              maxLitCount: "10"
+          severity: warning
+          disabled: false
+        - name: cognitive-complexity
+          arguments:
+            - 10
+          severity: warning
+          disabled: true
+        - name: max-public-structs
+          arguments:
+            - 10
+          severity: warning
+          disabled: false
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - dupl
+          - gocyclo
+          - gosec
+        path: _test\.go
+      - linters:
+          - asasalint
+          - goconst
+        path: (.+)_test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
