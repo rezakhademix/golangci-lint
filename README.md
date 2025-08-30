@@ -45,7 +45,7 @@ For integrating [golangci-lint](https://golangci-lint.run/) with VSCode just put
 ]
 ```
 
-At last Run:
+## 3) At last Run:
 ```
 go install -v github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
 ```
