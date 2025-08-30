@@ -30,21 +30,26 @@ For more information and a well detailed story you can read [What is A Golang Li
 For integrating [golangci-lint](https://golangci-lint.run/) with VSCode just put these line on user JSON settings file:
 
 ```
-"go.lintTool": "golangci-lint",
+"go.lintTool": "golangci-lint-v2",
 "go.lintFlags": [
   "--path-mode=abs",
   "--fast-only"
 ],
 "go.formatTool": "gofmt",
 "go.alternateTools": {
-  "customFormatter": "golangci-lint"
+  "customFormatter": "golangci-lint-v2"
 },
 "go.formatFlags": [
   "fmt",
   "--stdin"
 ]
-
 ```
+
+At last Run:
+```
+go install -v github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
+```
+
 
 ## Used Linters
 
