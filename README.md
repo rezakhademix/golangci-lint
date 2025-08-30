@@ -32,8 +32,18 @@ For integrating [golangci-lint](https://golangci-lint.run/) with VSCode just put
 ```
 "go.lintTool": "golangci-lint",
 "go.lintFlags": [
-    "--fast"
+  "--path-mode=abs",
+  "--fast-only"
+],
+"go.formatTool": "gofmt",
+"go.alternateTools": {
+  "customFormatter": "golangci-lint"
+},
+"go.formatFlags": [
+  "fmt",
+  "--stdin"
 ]
+
 ```
 
 ## Used Linters
